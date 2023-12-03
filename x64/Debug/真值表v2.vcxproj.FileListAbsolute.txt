@@ -1,2 +1,0 @@
-C:\Users\speacil\Desktop\离散编程作业\111\真值表v2\x64\Debug\真值表v2.exe
-C:\Users\speacil\Desktop\离散编程作业\真值表v2\x64\Debug\真值表v2.exe
