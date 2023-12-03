@@ -8,6 +8,7 @@
 #include <cmath>
 #include <cstring>
 #include <cstdlib>
+#include <string>
 using namespace std;
 #define assert(condition, message) \
     do { \
@@ -25,6 +26,8 @@ enum {
 
 int combination = 0;  //组合数
 vector<int>f_value = {}; //真值表
+vector<int> true_from_table={};//取1行生成公式
+vector<int> false_from_table={};//取0行生成公式
 class Variables
 {
 public:
@@ -306,6 +309,7 @@ bool isAllZeros(const std::vector<int>& vec, int begin = 0)
 }
 void normal_form(char c)
 {
+	
 	if (c == 'y' || c == 'Y')
 	{
 		cout << "主析取范式：";
@@ -382,16 +386,124 @@ void normal_form(char c)
 	else if (c == 'n' || c == 'N');
 	else
 	{
-		cout << "输入错误！" << endl;
+		cout << "非法输入！" << endl;
 	};
+
+}
+
+void generete_proposition_from_truthtable()
+{
+	cout << "注意：请保证真值表按顺序正确输入！未知结果行表头用r表示，默认从取1行来写" << endl;
+	true_from_table.clear();
+	false_from_table.clear();
+	var.clear();
+	string line1;
+	getline(cin, line1);
+	int number = 0;
+	for (int i = 0;i < line1.size();i++)
+	{
+		if (isalpha(line1[i]))
+		{
+			number++;
+			var.push_back(Variables(line1[i]));
+		}
+	}
+	var.pop_back();
+	int combine = pow(2, number - 1);
+	int row = 0;
+	for (int i = 0;i < combine * number;i++)
+	{
+		int value;
+		cin >> value;
+		if ((i + 1) % number == 0 && value== 1)
+		{
+			true_from_table.push_back(row);
+			row++;
+		}
+		else if ((i + 1) % number == 0 && value == 0)
+		{
+			false_from_table.push_back(row);
+			row++;
+		}
+		else;
+	}
+	cout << "从取1行生成的命题公式为：";
+	if (true_from_table.size() == 0)
+	{
+		cout << "空公式" ;
+	}
+	else
+	{
+		for (int r = 0;r < true_from_table.size();r++)
+		{
+			tran_bit(true_from_table[r]);
+			cout << "(";
+			for (int i = 0;i < var.size();i++)
+			{
+
+				if (i != var.size() - 1 && var[i].value == 1)
+					cout << var[i].name << "&";
+				else if (i != var.size() - 1 && var[i].value == 0)
+					cout << "!" << var[i].name << "&";
+				else if (i == var.size() - 1 && var[i].value == 1)
+					cout << var[i].name;
+				else if (i == var.size() - 1 && var[i].value == 0)
+					cout << "!" << var[i].name;
+			}
+			cout << ")";
+			if (r != true_from_table.size() - 1)
+				cout << "|";
+		}
+	}
+	cout << endl;
+	cout << "从取0行生成的命题公式为：" ;
+	if (false_from_table.size() == 0)
+	{
+		cout<<"空公式";
+	}
+	else
+	{
+		for (int r = 0;r < false_from_table.size();r++)
+		{
+			tran_bit(false_from_table[r]);
+			cout << "(";
+			for (int i = 0;i < var.size();i++)
+			{
+
+				if (i != var.size() - 1 && var[i].value == 0)
+					cout << var[i].name << "|";
+				else if (i != var.size() - 1 && var[i].value == 1)
+					cout << "!" << var[i].name << "|";
+				else if (i == var.size() - 1 && var[i].value == 0)
+					cout << var[i].name;
+				else if (i == var.size() - 1 && var[i].value == 1)
+					cout << "!" << var[i].name;
+			}
+			cout << ")";
+			if (r != false_from_table.size() - 1)
+				cout << "|";
+		}
+	}
+	cout << endl;
 
 }
 int main()
 {
 	cout << "联结词： ！:非   &:与   |：或   ^：蕴含   ~：双条件" << endl;
 	cout << "注意：变量用单独的小写或者大写字母表示！请使用英语输入法！输入exit退出" << endl;
+	cout<<"功能模块1：计算真值表.\n功能模块2：计算命题公式。"<<endl;
 	while (1)
 	{
+		cout<<"请选择功能模块："<<endl;
+		int module;
+		cin>>module;
+		if(module==2)
+		{
+			cin.get();
+			generete_proposition_from_truthtable();
+			continue;
+		}
+		else if(module==1){
 		f_value.clear();
 		cout << "请输入命题公式：(请尽量多添加括号，尤其是在！联结词前，如(!p))" << endl;
 		string s1;
@@ -408,10 +520,16 @@ int main()
 		print_table(s1);
 		cal_print_value(t);
 		cout << "真值表计算完毕！ " << endl;
-		cout << "是否要计算主析取、主和取范式？(y/n)"<<endl;
+		cout << "是否要计算主析取、主和取范式？(y/n)" << endl;
 		char c;
 		cin >> c;
 		normal_form(c);
+		}
+		else
+		{
+			cout<<"非法输入！"<<endl;
+			exit(1);
+		}
 	}
 	return 0;
 }

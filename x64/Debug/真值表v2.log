@@ -1,7 +1,8 @@
 ﻿  v2.cpp
-C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(96,48): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(148,19): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
-C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(238,8): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(407,31): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(217): warning C4715: “single_operator”: 不是所有的控件路径都返回值
+C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(99,48): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(151,19): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(241,8): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(412,14): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(519,31): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\speacil\Desktop\离散编程作业\真值表v2\v2.cpp(220): warning C4715: “single_operator”: 不是所有的控件路径都返回值
   真值表v2.vcxproj -> C:\Users\speacil\Desktop\离散编程作业\真值表v2\x64\Debug\真值表v2.exe
