@@ -1,6 +1,6 @@
 
 //                                真值表计算器 v3 +主范式+从真值表生成命题公式
-		//                            如果汉字出现乱码请更改编码方式    作者：李昊博									
+		//                            如果汉字出现乱码请更改编码方式    								
 
 #include <iostream>
 #include <vector>
@@ -177,7 +177,7 @@ void build_tree(string s, bina_tree*& father, int begin, int end) //建树
 	{
 		int d_bracket = 0;
 		int no = -1;
-		char preop = '~';
+		char preop='~';
 		for (int i = begin;i < end;i++)
 		{
 			if (s[i] == '(')
@@ -185,7 +185,7 @@ void build_tree(string s, bina_tree*& father, int begin, int end) //建树
 			else if (s[i] == ')')
 				d_bracket--;
 			//判断括号是否匹配
-			if (d_bracket == 0 && op_check(s[i]) && (no == -1 || op_compare(s[i], preop)))
+			if (d_bracket == 0 && op_check(s[i]) && (no == -1 || op_compare(preop,s[i])))
 			{
 				no = i;
 				preop = s[i];
@@ -490,22 +490,23 @@ void generete_proposition_from_truthtable()
 int main()
 {
 	cout << "联结词： ！:非   &:与   |：或   ^：蕴含   ~：双条件" << endl;
-	cout << "注意：变量用单独的小写或者大写字母表示！请使用英语输入法！输入exit退出" << endl;
+	cout << "运算符默认优先级：非>与>或>蕴含>双条件" << endl;
+	cout << "注意：变量用单独的小写或者大写字母表示！请使用英语输入法！\n输入exit退出" << endl;
 	cout<<"功能模块1：计算真值表.\n功能模块2：计算命题公式。"<<endl;
 	while (1)
 	{
-		cout<<"请选择功能模块：(输入0退出)"<<endl;
-		int module;
+		cout<<"请选择功能模块："<<endl;
+		string module;
 		cin>>module;
-		if(module==2)
+		if (module == "2")
 		{
 			cin.get();
 			generete_proposition_from_truthtable();
 			continue;
 		}
-		else if(module==1){
+		else if (module == "1") {
 		f_value.clear();
-		cout << "请输入命题公式：(请尽量多添加括号，尤其是在！联结词前，如(!p))" << endl;
+		cout << "请输入命题公式：(请尽量多添加括号)" << endl;
 		string s1;
 		cin >> s1;
 		bina_tree* t = new bina_tree;
@@ -525,7 +526,7 @@ int main()
 		cin >> c;
 		normal_form(c);
 		}
-		else if (module == 0)
+		else if (module == "exit")
 		{
 			cout<<"感谢您使用本程序，我们下次再见！"<<endl;
 			exit(1);
